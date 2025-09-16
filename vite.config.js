@@ -1,10 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// Externalize supabase to fix build
 export default defineConfig({
   plugins: [react()],
-  base: "./", // Important for SPA assets in Vercel
+  base: "./",
   build: {
-    outDir: "dist"
+    outDir: "dist",
+    rollupOptions: {
+      external: ["@supabase/supabase-js"]
+    }
   }
 });
